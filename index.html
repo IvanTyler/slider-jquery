@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>slider</title>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+</head>
+
+<body>
+    <style>
+        #paragraf {
+            width: 200px;
+            padding: 10px;
+            background-color: rgba(105, 225, 128)
+        }
+
+        .paragraf-text {
+            width: 200px;
+            padding: 10px;
+            color: rgba(55, 55, 108)
+        }
+
+        input[type=range] {
+            color: red;
+        }
+
+        .editBgcolor-item {
+            display: flex;
+            align-items: center;
+        }
+
+        .editBgcolor-title {
+            display: inline-block;
+            width: 140px;
+        }
+
+        .active {
+            background-color: #1991eb;
+        }
+    </style>
+
+    <script>
+        const sliderBGcolor = () => {
+
+            let red = $("#inputSliderRed").val()
+            let green = $("#inputSliderGreen").val()
+            let blue = $("#inputSliderBlue").val()
+
+            $(document).ready(function () {
+                let paragraf = $("#paragraf")
+                paragraf.css({ "background-color": `rgba(${red},${green},${blue})` })
+            });
+        }
+
+        const sliderColor = () => {
+
+            let red = $("#inputSliderRed").val()
+            let green = $("#inputSliderGreen").val()
+            let blue = $("#inputSliderBlue").val()
+
+            $(document).ready(function () {
+                let paragrafText = $(".paragraf-text")
+                paragrafText.css({ "color": `rgba(${red},${green},${blue})` })
+            });
+        }
+
+        $(document).ready(function () {
+
+            $('.rangeBGcolor').on('input', function () {
+                if ($('.button-color').hasClass('active')) {
+                    return sliderColor()
+                }
+            });
+            $('.button-color').on('click', function () {
+                $('.button-color').addClass('active')
+                $('.button-BGcolor').removeClass('active')
+                $('.rangeBGcolor').on('input', function () {
+                    if ($('.button-color').hasClass('active')) {
+                        return sliderColor()
+                    }
+                });
+            })
+            $('.button-BGcolor').on('click', function () {
+                $('.button-color').removeClass('active')
+                $('.button-BGcolor').addClass('active')
+                $('.rangeBGcolor').on('input', function () {
+                    if ($('.button-BGcolor').hasClass('active')) {
+                        return sliderBGcolor()
+                    }
+                });
+            })
+        });
+
+
+    </script>
+    <div class="slider">
+        <div class="wrapper-toggle-textBlock">
+            <button class="button-color active">color</button>
+            <button class="button-BGcolor">background-color</button>
+        </div>
+        <div class="editBgcolor">
+            <div class="editBgcolor-item">
+                <span class="editBgcolor-title">Оттенок красного:</span> <input type="range" max="255"
+                    class="rangeBGcolor" id="inputSliderRed" value="30">
+            </div>
+            <div class="editBgcolor-item">
+                <span class="editBgcolor-title">Оттенок зеленого:</span> <input type="range" max="255"
+                    class="rangeBGcolor" id="inputSliderGreen" value="50">
+            </div>
+            <div class="editBgcolor-item">
+                <span class="editBgcolor-title">Оттенок синего:</span> <input type="range" max="255"
+                    class="rangeBGcolor" id="inputSliderBlue" value="70">
+            </div>
+        </div>
+        <p id="paragraf">
+            <span class="paragraf-text">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Eius ut saepe dicta, dolorum corporis voluptas molestiae!
+                Dicta rerum provident, eveniet officiis vel, ex, porro quo
+                unde quia aspernatur voluptatibus similique!
+            </span>
+        </p>
+    </div>
+</body>
+
+</html>
